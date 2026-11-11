@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163d32">
+  <title>НОВИЧОК — Первые 90 дней</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Новичок — главная"><span class="brand-mark" aria-hidden="true">н<span>•</span></span><span>НОВИЧОК<small>Первые 90 дней</small></span></a>
+    <div class="workspace-label">ПРОСТРАНСТВО КОМАНДЫ</div>
+    <nav aria-label="Режим работы" class="mode-nav">
+      <button type="button" id="manager-mode" class="nav-item active" aria-pressed="true"><span aria-hidden="true">▦</span> Руководитель</button>
+      <button type="button" id="employee-mode" class="nav-item" aria-pressed="false"><span aria-hidden="true">☷</span> Ответ новичка</button>
+    </nav>
+    <div class="sidebar-note"><span class="note-symbol" aria-hidden="true">↗</span><h2>Хороший старт —<br>это внимание.</h2><p>Замечайте сложности вовремя.<br>Помогайте маленькими шагами.</p><div class="mini-path" aria-hidden="true"><i></i><b></b><b></b><span>90</span></div></div>
+    <div class="sidebar-footer"><span class="live-dot"></span> Демо-пространство <small>Забота о людях, а не контроль</small></div>
+  </aside>
+  <div class="shell">
+    <header class="topbar"><span>Адаптация команды</span><span class="separator">/</span><strong id="breadcrumb">Обзор</strong><div class="topbar-right"><span id="today"></span><span class="avatar" aria-hidden="true">HR</span></div></header>
+    <main>
+      <div class="demo-notice"><span aria-hidden="true">ⓘ</span><span><strong>Демонстрационный режим.</strong> Все люди вымышлены. Авторизации нет: данные и действия доступны всем посетителям. Не вводите персональные или конфиденциальные сведения.</span></div>
+      <div id="global-error" class="message error" role="alert" hidden></div>
+      <section id="manager-view" aria-labelledby="page-title">
+        <div class="page-heading"><div><div class="eyebrow">ЛЮДИ В ЦЕНТРЕ ВНИМАНИЯ</div><h1 id="page-title">Первые 90 дней<span class="title-dot">.</span></h1><p>Помогите новичкам почувствовать себя частью команды.</p></div><button type="button" id="refresh" class="button secondary"><span aria-hidden="true">↻</span> Обновить</button></div>
+        <div id="summary" class="summary" aria-label="Сводка адаптации"></div>
+        <div class="section-heading"><div><h2>Ваша команда <span id="team-count" class="count">0</span></h2><p>От первого знакомства до уверенной работы</p></div><span class="section-caption">Приоритет — тем, кому нужна помощь</span></div>
+        <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Найти по имени или должности" aria-label="Поиск сотрудника"></label><label class="department-label"><span class="sr-only">Подразделение</span><select id="department"><option value="">Все подразделения</option></select></label></div>
+        <div class="priority-filters" role="group" aria-label="Фильтр по приоритету"><button type="button" class="filter active" data-priority="all" aria-pressed="true">Все сотрудники</button><button type="button" class="filter" data-priority="urgent" aria-pressed="false"><i class="dot urgent"></i> Нужна помощь</button><button type="button" class="filter" data-priority="attention" aria-pressed="false"><i class="dot attention"></i> Обратить внимание</button><button type="button" class="filter" data-priority="ok" aria-pressed="false"><i class="dot ok"></i> Без сигналов</button></div>
+        <div id="loading" class="empty" role="status">Загружаем вашу команду…</div>
+        <div id="employee-list" class="employee-list" aria-live="polite"></div>
+        <div class="legend"><span><i class="dot ok"></i> Приоритет рассчитывается по ответам и задачам</span><span>Каждый ответ — повод для диалога</span></div>
+      </section>
+      <section id="employee-view" hidden aria-labelledby="response-title">
+        <div class="page-heading"><div><div class="eyebrow">МАЛЕНЬКИЙ РАЗГОВОР О ВАЖНОМ</div><h1 id="response-title">Как проходит ваш старт<span class="title-dot">?</span></h1><p>Три коротких вопроса, чтобы команда могла помочь.</p></div></div>
+        <div class="response-layout">
+          <form id="checkin-form" class="panel response-form">
+            <label class="field">Кто отвечает<select id="respondent" required><option value="">Выберите сотрудника</option></select></label>
+            <div id="respondent-info" class="muted"></div>
+            <fieldset><legend>Как вы себя чувствуете? <span class="required">*</span></legend><div class="mood-options">
+              <label><input type="radio" name="mood" value="good" required><span>☺<small>Хорошо</small></span></label>
+              <label><input type="radio" name="mood" value="neutral" required><span>😐<small>Нейтрально</small></span></label>
+              <label><input type="radio" name="mood" value="bad" required><span>☹<small>Сложно</small></span></label>
+            </div></fieldset>
+            <div id="checkin-questions"></div>
+            <label class="field">Что ещё стоит знать? <span class="optional">Необязательно</span><textarea name="comment" rows="4" maxlength="1500" placeholder="Что получается, а с чем нужна помощь?"></textarea></label>
+            <div id="checkin-error" class="message error" role="alert" hidden></div>
+            <button type="submit" class="button primary" id="checkin-submit">Отправить ответ <span aria-hidden="true">↗</span></button>
+            <p class="form-footnote">Ответ будет виден в карточке сотрудника. Это не анонимный опрос.</p>
+          </form>
+          <aside class="response-aside"><span class="large-symbol" aria-hidden="true">✳</span><h2>Не нужно справляться<br>со всем в одиночку.</h2><p>Если что-то непонятно или не хватает инструментов — расскажите. Так руководителю будет проще предложить конкретную помощь.</p><div class="aside-rule"></div><small>Здесь нет правильных ответов.<br>Есть ваш опыт — и он важен.</small></aside
+>
+        </div>
+      </section>
+      <footer class="main-footer"><span class="footer-brand">НОВИЧОК <span>/</span> Первые 90 дней</span><span>Уверенный старт начинается с поддержки.</span></footer>
+    </main>
+  </div>
+  <dialog id="employee-dialog" aria-labelledby="detail-title"><div class="dialog-top"><span class="eyebrow">КАРТОЧКА АДАПТАЦИИ</span><button type="button" class="icon-button" id="close-dialog" aria-label="Закрыть карточку">×</button></div><div id="detail-content"></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

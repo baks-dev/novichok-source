@@ -1,0 +1,13 @@
+{
+  "name": "novichok-first90",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Первые 90 дней: сигнал новичка → помощь руководителя",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "node server.js",
+    "demo": "node scripts/start-demo.js",
+    "test": "node --test tests/*.test.js"
+  }
+}

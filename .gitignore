@@ -1,0 +1,5 @@
+data/
+node_modules/
+artifacts/frames/
+artifacts/*.log
+novichok-source.zip
